@@ -1,23 +1,18 @@
-name: Run Azure Login with OpenID Connect
 on: [push]
 
-permissions:
-      id-token: write
-      contents: read
-      
-jobs: 
+name: AzureLoginSample
+
+jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: 'Az CLI login'
-      uses: azure/login@v1
-      with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-  
-    - name: 'Run Azure CLI commands'
-      run: |
-          az account show
-          az group list
-          pwd
+      - name: Log in with Azure
+        uses: azure/login@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          enable-AzPSSession: true
+      - name: Azure PowerShell Action
+        uses: Azure/powershell@v1
+        with:
+          inlineScript: Get-AzResourceGroup -Name "< YOUR RESOURCE GROUP >"
+          azPSVersion: "latest"
