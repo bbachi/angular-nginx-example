@@ -3,6 +3,8 @@ name: Deployment
     push:
         branches:
             - master
+        paths:
+            - tic-tac-toe-project/**    
     workflow_dispatch: {}
 env:
     ACR_RESOURCE_GROUP: AZ_RG
