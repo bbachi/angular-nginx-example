@@ -4,7 +4,7 @@ name: Deployment
         branches:
             - master
         paths:
-            - tic-tac-toe-project/**    
+            - my-app/**    
     workflow_dispatch: {}
 env:
     ACR_RESOURCE_GROUP: AZ_RG
