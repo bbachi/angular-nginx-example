@@ -36,7 +36,7 @@ jobs:
             #  shell: bash
            #   run: bash ${GITHUB_WORKSPACE}/.github/scripts/code_linter.sh  
             - name: Run this step only if container images were found in the cache
-              if: ${{ secrets.AZURE_CLIENT_ID != 'true' }}
+              if: github.event.ref == 'refs/heads/main'
               shell: bash
               run: echo "Container images were found in the cache..."
               
