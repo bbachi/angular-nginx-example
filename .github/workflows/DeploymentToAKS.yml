@@ -31,3 +31,12 @@ jobs:
                 tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             - name: Build and push image to ACR
               run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f Dockerfile ./
+                  # Check the code linter errors and warnings
+           # - name: Check the code linter errors and warnings
+            #  shell: bash
+           #   run: bash ${GITHUB_WORKSPACE}/.github/scripts/code_linter.sh  
+            - name: Run this step only if container images were found in the cache
+              if: ${{ secrets.AZURE_CLIENT_ID != 'true' }}
+              shell: bash
+              run: echo "Container images were found in the cache..."
+              
