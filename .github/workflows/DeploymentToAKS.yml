@@ -31,6 +31,11 @@ jobs:
                 tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             - name: Build and push image to ACR
               run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f Dockerfile ./
+            - uses: actions/upload-artifact@main
+              with:
+               name: webpack artifacts
+               path: public/  
+               
                   # Check the code linter errors and warnings
            # - name: Check the code linter errors and warnings
             #  shell: bash
