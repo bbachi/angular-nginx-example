@@ -3,7 +3,6 @@ WORKDIR /usr/src/app
 COPY my-app/ ./my-app/
 RUN cd my-app && npm install @angular/cli && npm install && npm run build
 
-
 FROM nginx:alpine
 
 #!/bin/sh
